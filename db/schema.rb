@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20180330182536) do
     t.string "name"
     t.text "description"
     t.integer "vote_threshold"
-    t.integer "status"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

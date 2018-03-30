@@ -4,7 +4,7 @@ class CreateElections < ActiveRecord::Migration[5.1]
       t.string :name
       t.text :description
       t.integer :vote_threshold
-      t.integer :status, default: 0
+      t.integer :status, null: false, default: 0
       t.timestamps
     end
   end
