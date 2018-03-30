@@ -2,12 +2,15 @@
 
 ## Election
 
-many options
+name
+description
 vote_threshold (how many voters need to vote before it moves to the next round)
 status (accepting_votes, accepting_options, closed)
+`has_many` options
 
 ## Option
 
+name
 belongs_to election
 has_many votes
 status (available, knocked out, victorious)
