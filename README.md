@@ -1,37 +1,26 @@
 # Models for an instant runoff vote
 
-# Election
+## Election
 
-# many options
+many options
+vote_threshold (how many voters need to vote before it moves to the next round)
+status (accepting_votes, accepting_options, closed)
 
-# vote_threshold (how many voters need to vote before it moves to the next round)
+## Option
 
-# status (accepting_votes, accepting_options, closed)
+belongs_to election
+has_many votes
+status (available, knocked out, victorious)
 
-# Option
+## Vote
 
-# belongs_to election
+belongs_to election
+belongs_to option
+belongs_to (voter)
+constraint - one vote per voter per election (unique index on voter_id, election_id)
+constraint - election_id = option.election_id
 
-# has_many votes
+## Voter
 
-# status (available, knocked out, victorious)
-
-# Vote
-
-# belongs_to election
-
-# belongs_to option
-
-# belongs_to (voter)
-
-# constraint - one vote per voter per election (unique index on voter_id, election_id)
-
-# constraint - election_id = option.election_id
-
-# Voter
-
-# has_many votes
-
-# name
-
-#
+has_many votes
+name

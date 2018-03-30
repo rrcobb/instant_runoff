@@ -11,6 +11,4 @@ class Application < Sinatra::Base
   # vote
   # view election results (see the votes)
   # move election to the next round
-
-
 end
