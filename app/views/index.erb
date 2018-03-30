@@ -1,0 +1,13 @@
+  <% @elections.each do |election| %>
+  <div>
+    <h2><%= election.name %></h2>
+    <p><%= election.description %></p>
+    <small>
+      Votes needed: <%= election.vote_threshold %>
+    </small>
+    <br>
+    <small>
+      Status: <%= election.status %>
+    </small>
+  </div>
+<% end %>
