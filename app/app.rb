@@ -1,5 +1,4 @@
 class Application < Sinatra::Base
-
   # see elections
   get '/' do
     @elections = Election.last(10)

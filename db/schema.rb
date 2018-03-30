@@ -21,10 +21,27 @@ ActiveRecord::Schema.define(version: 20180330190929) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "options", force: :cascade do |t|
+    t.integer "election_id"
+    t.string "name"
+    t.string "status"
+  end
+
   create_table "rounds", force: :cascade do |t|
     t.integer "election_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "voters", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "election_id"
+    t.integer "option_id"
+    t.integer "voter_id"
+    t.index ["voter_id", "election_id"], name: "index_votes_on_voter_id_and_election_id", unique: true
   end
 
 end

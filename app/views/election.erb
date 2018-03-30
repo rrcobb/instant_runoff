@@ -8,4 +8,17 @@
     <small>
       Status: <%= @election.status %>
     </small>
+    <div>
+      <h3>Options</h3>
+      <% @election.options.each do |option| %>
+        <div>
+          <%= option.name %>
+        </div>
+      <% end %>
+      <h3>Add An Option</h3>
+      <form action=<%= "/election/#{@election.id}/option"%> method="POST">
+        <input type="text" name="name"></input>
+        <button>Add Option</button>
+      </form>
+    </div>
   </div>
