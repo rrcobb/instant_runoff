@@ -21,7 +21,7 @@ class Application < Sinatra::Base
   # add option
   post '/election/:id/option' do
     @election = Election.find(params[:id].to_i)
-    option = Option.create(params.slice(:name, )
+    option = Option.create(params.slice(:name))
     @election.options << option
     erb :election
   end

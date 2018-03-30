@@ -10,13 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330182536) do
+ActiveRecord::Schema.define(version: 20180330190929) do
 
   create_table "elections", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "vote_threshold"
     t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.integer "election_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
