@@ -1,13 +1,31 @@
-  <% @elections.each do |election| %>
-  <div>
-    <h2><a href=<%= "/election/#{election.id}"%>><%= election.name %></a></h2>
-    <p><%= election.description %></p>
-    <small>
-      Votes needed: <%= election.vote_threshold %>
-    </small>
-    <br>
-    <small>
-      Status: <%= election.status %>
-    </small>
+<h2>Add a new election</h2>
+<form action="/election" method="POST">
+  <div class="row">
+    <span>Name</span>
+    <input type="text" name="name"></input>
   </div>
+  <div class="row">
+    <span>Description</span>
+    <input type="text" name="description"></textarea>
+  </div>
+  <div class="row">
+    <span>Vote Minimum</span>
+    <input type="text" name="vote_threshold"></input>
+  </div>
+  <div class="row">
+    <button>Create</button>
+  </div>
+</form>
+<% @elections.each do |election| %>
+<div>
+  <h2><a href=<%= "/election/#{election.id}"%>><%= election.name %></a></h2>
+  <p><%= election.description %></p>
+  <small>
+    Votes needed: <%= election.vote_threshold %>
+  </small>
+  <br>
+  <small>
+    Status: <%= election.status %>
+  </small>
+</div>
 <% end %>

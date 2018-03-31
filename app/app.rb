@@ -1,7 +1,7 @@
 class Application < Sinatra::Base
   # see elections
   get '/' do
-    @elections = Election.last(10)
+    @elections = Election.last(10).sort_by { |e| e.created_at }.reverse
     erb :index
   end
 

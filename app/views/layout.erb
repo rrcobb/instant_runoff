@@ -1,8 +1,22 @@
+<style>
+div.row {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  margin: 15px;
+}
+
+input {
+  width: 250px;
+  height: 24px;
+  border: 1px solid black;
+}
+
+</style>
 <h1> Instant Runoff Voting! </h1>
 <nav>
   <a href="/">Home</a>
   <a href="https://en.wikipedia.org/wiki/Instant-runoff_voting">About</a>
   <a href="https://github.com/rrcobb/instant_runoff">Github</a>
 </nav>
-
 <%= yield :content %>
