@@ -7,9 +7,7 @@ class Election < ActiveRecord::Base
   # Core logic for deciding the winner of the election
   # Does a candidate have a majority of the votes?
   #   If yes, declare winner!
-  #   If no, eliminate the last-ranked candidate, and reapportion that candidate's voters according to their next-ranked votes (if there are any)
-  # recursive - will do a query for votes each round,
-
+  #   If not, eliminate the last-ranked candidate, and reapportion that candidate's voters according to their next-ranked votes (if there are any)
   def winner(remaining_option_ids = options.pluck(:id))
     counts = vote_counts(remaining_option_ids)
     total = counts.values.flatten.count
@@ -21,11 +19,17 @@ class Election < ActiveRecord::Base
     winner(counts.sort_by { |k, v| v }.map(&:first).first(counts.length - 1))
   end
 
-  def vote_counts(option_ids)
+  # top-ranked votes per voter among the given options
+  def highest_vote_per_voter(option_ids)
     votes.where(option_id: option_ids)
     .order(:rank)
     .group_by(&:voter_id)
     .map { |k, v| v.first}
+  end
+
+  # vote counts per option, from a set of options
+  def vote_counts(option_ids)
+    highest_vote_per_voter(option_ids)
     .group_by(&:option_id)
     .transform_values(&:count)
   end
