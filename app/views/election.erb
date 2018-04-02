@@ -6,7 +6,7 @@
     Status: <%= @election.status %>
   </small>
   <div>
-    <h3>Cast your Ballot:</h3>
+    <h3>Rank the options and cast your ballot (1 is the best rank):</h3>
     <form action=<%= "/election/#{@election.id}/ballot" %> method="POST">
       <% @election.options.each do |option| %>
       <div>

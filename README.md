@@ -23,6 +23,11 @@ Mostly just a sinatra demo.
 * `belongs_to` election
 * `has_many` votes
 
+### Voter
+
+* name (unique)
+* `has_many` votes
+
 ### Vote
 
 * rank
@@ -32,7 +37,6 @@ Mostly just a sinatra demo.
 * one vote per rank voter per election (unique index on voter_id, rank, election_id)
 * application level validation: `election_id == option.election_id`
 
-### Voter
+## Logic
 
-* name (unique)
-* `has_many` votes
+The interesting logic happens in the `Election` class. We recursively compute a winner by checking if any of the available candidates has a majority of votes (>50%). Each round of the recursion eliminates the lowest ranked candidate and reassigns the votes of those voters to their next-best-ranked candidate.
