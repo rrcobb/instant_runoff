@@ -2,9 +2,6 @@
   <h2><a href=<%= "/election/#{@election.id}"%>><%= @election.name %></a></h2>
   <p><%= @election.description %></p>
   <br>
-  <small>
-    Status: <%= @election.status %>
-  </small>
   <div>
     <h3>Rank the options and cast your ballot (1 is the best rank):</h3>
     <form action=<%= "/election/#{@election.id}/ballot" %> method="POST">
