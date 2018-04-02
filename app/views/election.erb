@@ -1,24 +1,24 @@
 <div>
-    <h2><a href=<%= "/election/#{@election.id}"%>><%= @election.name %></a></h2>
-    <p><%= @election.description %></p>
-    <small>
-      Votes needed: <%= @election.vote_threshold %>
-    </small>
-    <br>
-    <small>
-      Status: <%= @election.status %>
-    </small>
-    <div>
-      <h3>Options</h3>
+  <h2><a href=<%= "/election/#{@election.id}"%>><%= @election.name %></a></h2>
+  <p><%= @election.description %></p>
+  <br>
+  <small>
+    Status: <%= @election.status %>
+  </small>
+  <div>
+    <h3>Cast your Ballot:</h3>
+    <form>
+      <div>Your Name: <input name="voter_name" type="text"></input></div>
       <% @election.options.each do |option| %>
-        <div>
-          <%= option.name %>
-        </div>
+      <div>
+        <%= option.name %>
+      </div>
       <% end %>
-      <h3>Add An Option</h3>
-      <form action=<%= "/election/#{@election.id}/option"%> method="POST">
-        <input type="text" name="name"></input>
-        <button>Add Option</button>
-      </form>
-    </div>
+    </form>
+    <h3>Add An Option</h3>
+    <form action=<%= "/election/#{@election.id}/option"%> method="POST">
+      <input type="text" name="name"></input>
+      <button>Add Option</button>
+    </form>
   </div>
+</div>

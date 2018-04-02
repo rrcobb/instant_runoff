@@ -4,7 +4,6 @@
 
 name
 description
-vote_threshold (how many voters need to vote before it moves to the next round)
 status (accepting_votes, accepting_options, closed)
 `has_many` options
 

@@ -9,10 +9,6 @@
     <input type="text" name="description"></textarea>
   </div>
   <div class="row">
-    <span>Vote Minimum</span>
-    <input type="text" name="vote_threshold"></input>
-  </div>
-  <div class="row">
     <button>Create</button>
   </div>
 </form>
@@ -20,10 +16,6 @@
 <div>
   <h2><a href=<%= "/election/#{election.id}"%>><%= election.name %></a></h2>
   <p><%= election.description %></p>
-  <small>
-    Votes needed: <%= election.vote_threshold %>
-  </small>
-  <br>
   <small>
     Status: <%= election.status %>
   </small>

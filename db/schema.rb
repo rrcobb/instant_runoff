@@ -10,38 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330190929) do
+ActiveRecord::Schema.define(version: 20180330182752) do
 
   create_table "elections", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "description"
-    t.integer "vote_threshold"
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "options", force: :cascade do |t|
-    t.integer "election_id"
-    t.string "name"
-    t.string "status"
-  end
-
-  create_table "rounds", force: :cascade do |t|
-    t.integer "election_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "election_id", null: false
+    t.string "name", null: false
+    t.index ["election_id", "name"], name: "index_options_on_election_id_and_name", unique: true
   end
 
   create_table "voters", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.index ["name"], name: "index_voters_on_name", unique: true
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer "election_id"
-    t.integer "option_id"
-    t.integer "voter_id"
-    t.index ["voter_id", "election_id"], name: "index_votes_on_voter_id_and_election_id", unique: true
+    t.integer "election_id", null: false
+    t.integer "option_id", null: false
+    t.integer "voter_id", null: false
+    t.integer "rank", null: false
+    t.index ["voter_id", "election_id", "rank"], name: "index_votes_on_voter_id_and_election_id_and_rank", unique: true
   end
 
 end

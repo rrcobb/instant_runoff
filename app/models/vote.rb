@@ -4,6 +4,7 @@ class Vote < ActiveRecord::Base
   belongs_to :voter
 
   validate :matches_option_election_id
+  validate :possible_rank
 
   def matches_option_election_id
     if self.election_id != self.option.election_id
@@ -11,4 +12,9 @@ class Vote < ActiveRecord::Base
     end
   end
 
+  def possible_rank
+    if self.rank < 1 || self.rank > self.election.options.count
+      errors.add(:rank, 'rank must be in the range of the available options')
+    end
+  end
 end
