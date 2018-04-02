@@ -1,0 +1,32 @@
+<h2><%= @election.name %></h2>
+<ol>
+<% @election.vote_counts.sort_by {|k,v| -v }.each do |option_id, vote_count| %>
+<li>
+  </strong><%= vote_count %></strong> First Choice Votes: <%= Option.find(option_id).name %>
+</li>
+<% end %>
+</ol>
+
+<a href=<%= "/election/#{@election.id}"%>>Back to Election</a>
+<br />
+<br />
+<br />
+
+<% if @election.votes.count > 10 # todo choose less arbitrary cutoff %>
+  The current leader is...
+  <br />
+  <h3><%= @election.winner.name %></h3>
+  with:
+  <br />
+  <ul>
+  <% @election.winner.votes.sort_by(&:rank).group_by(&:rank).each do |rank, votes| %>
+    <li>
+      <strong><%= votes.count %></strong>
+      <%= ActiveSupport::Inflector.ordinalize(rank) %> choice votes
+      <em>
+        (<%= (100 * votes.count.to_f / @election.votes.where(rank: rank).count).round(2) %>%)
+      </em>
+    </li>
+  <% end %>
+  </ul>
+<% end %>

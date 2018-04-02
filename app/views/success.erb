@@ -1,0 +1,11 @@
+<h3>Ballot Submitted!</h3>
+
+<span>Your votes: </span>
+<ul>
+<% @votes.sort_by { |vote| vote.rank }.each do |vote| %>
+  <li><%= vote.rank %>. <%= vote.option.name %></li>
+<% end %>
+</ul>
+
+<a href=<%= "/election/#{@election.id}" %>>Back to Election</a>
+<a href=<%= "/election/#{@election.id}/results" %>>View Results</a>

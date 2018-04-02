@@ -3,6 +3,7 @@ class Election < ActiveRecord::Base
   has_many :options
   has_many :votes, through: :options
   has_many :voters, through: :votes
+  extend Memoist
 
   # Core logic for deciding the winner of the election
   # Does a candidate have a majority of the votes?
@@ -18,6 +19,7 @@ class Election < ActiveRecord::Base
     Option.find(top) :
     winner(counts.sort_by { |k, v| v }.map(&:first).first(counts.length - 1))
   end
+  memoize :winner
 
   # top-ranked votes per voter among the given options
   def highest_vote_per_voter(option_ids)
@@ -28,7 +30,7 @@ class Election < ActiveRecord::Base
   end
 
   # vote counts per option, from a set of options
-  def vote_counts(option_ids)
+  def vote_counts(option_ids = options.pluck(:id))
     highest_vote_per_voter(option_ids)
     .group_by(&:option_id)
     .transform_values(&:count)

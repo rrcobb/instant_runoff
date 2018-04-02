@@ -17,4 +17,18 @@ class Vote < ActiveRecord::Base
       errors.add(:rank, 'rank must be in the range of the available options')
     end
   end
+
+  # create votes for each of the options ranked on the ballot
+  def self.mark_ballot(voter, election, params)
+    params
+    .select { |k,v| k.to_s.match(/option_rank_/) }
+    .map do |param_name, rank|
+      Vote.create(
+        voter: voter,
+        election: election,
+        rank: rank,
+        option_id: Option.option_id_from_param_name(param_name)
+      )
+    end
+  end
 end

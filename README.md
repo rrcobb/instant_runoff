@@ -25,4 +25,4 @@ constraint - election_id = option.election_id
 ## Voter
 
 has_many votes
-name
+name (unique)

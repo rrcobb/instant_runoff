@@ -20,14 +20,16 @@ class Application < Sinatra::Base
   # add option
   post '/election/:id/option' do
     @election = Election.find(params[:id].to_i)
-    option = Option.create(params.slice(:name))
+    option = Option.create(params.slice(:name).merge(election: @election))
     @election.options << option
     erb :election
   end
 
-  # vote
-  post '/election/:id/vote' do
-    erb  :election
+  post '/election/:id/ballot' do
+    @election = Election.find(params[:id].to_i)
+    @voter = Voter.find_or_create_by(name: params[:voter_name])
+    @votes = Vote.mark_ballot(@voter, @election, params)
+    erb :success
   end
 
   # view election results (see the votes)

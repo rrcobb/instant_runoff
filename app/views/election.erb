@@ -7,7 +7,7 @@
   </small>
   <div>
     <h3>Cast your Ballot:</h3>
-    <form action="/ballot" method="POST">
+    <form action=<%= "/election/#{@election.id}/ballot" %> method="POST">
       <% @election.options.each do |option| %>
       <div>
         <input
@@ -15,7 +15,7 @@
         step="1"
         min="1"
         placeholder="Rank"
-        name=<%= "option_rank_${option.id}" %>
+        name=<%= option.param_name %>
         max=<%= "\"#{@election.options.count}\"" %>
         />
         <%= option.name %>
